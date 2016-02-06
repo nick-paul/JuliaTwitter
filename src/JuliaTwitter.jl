@@ -13,7 +13,8 @@ export
   TwAuth,
   TwUser,
   get_followers,
-  auth
+  auth,
+  get_oauth
 
 
 type TwAuth
@@ -22,8 +23,6 @@ type TwAuth
   access_token::ASCIIString
   access_secret::ASCIIString
 end
-
-
 
 # A few testing functions, these will be organized into files later
 function get_oauth(auth::TwAuth, url::ASCIIString, options::Dict)
@@ -37,6 +36,10 @@ end
 # For testing, will be removed later
 include("../../auth_setup.jl")
 auth = TwAuth(consumer_key, consumer_secret, access_token, access_secret)
+
+
+include("get_statuses.jl")
+include("get_users.jl")
 
 
 end
