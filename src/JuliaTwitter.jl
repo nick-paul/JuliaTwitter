@@ -40,6 +40,17 @@ auth = TwAuth(consumer_key, consumer_secret, access_token, access_secret)
 
 include("get_statuses.jl")
 include("get_users.jl")
+include("get_help.jl")
+
+export
+  get_help_tos,
+  get_help_privacy,
+  get_help_languages,
+  get_help_configuration
+
+include("get_application.jl")
+
+export get_application_rate_limit_status
 
 
 end

@@ -1,2 +1,2 @@
-include("src/JuliaTwitter.jl")
+include("../src/JuliaTwitter.jl")
 using JuliaTwitter
