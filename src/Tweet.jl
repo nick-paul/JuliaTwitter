@@ -2,5 +2,6 @@
 # Placeholder for now
 
 type Tweet
+  #annotations::TwitterObject
   content::ASCIIString
 end
