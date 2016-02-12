@@ -1,8 +1,3 @@
-# Type file for a twitter user
-
-function parse_user(str::AbstractString)
-  "parse successful"
-end
 
 type TwUser
   contributors_enabled::Bool #Account has contributor mode enabled
@@ -10,10 +5,7 @@ type TwUser
   default_profile::Bool #If true, user has not altered the theme or background of their user profile
   default_profile_image::Bool #If true, user has not uploaded their own avatar
   description::Nullable{AbstractString} #Nullable, UTF-8 string describing their account
-
-  #Add T<:TwEntity later
   #entities::Array{TwEntity} #Entities which have been parsed out of the urlor description fields defined by the user
-
   favourites_count::Int #Number of tweets favorited by the user
   follow_request_sent::Nullable{Bool} #When true, the authenticating user has issued a follow request to this user account
   following::Nullable{Bool} #DEPRECEATED, When true, the authenticating user is following this user
@@ -43,7 +35,7 @@ type TwUser
   protected::Bool #When true, indicates that this user has chosen to protect their Tweets
   screen_name::AbstractString #The screen name, handle, or alias that this user identifies themselves with
   show_all_inline_media::Bool #Indicates that the user would like to see media inline
-  #status::Nullable{Tweet} #Nullable. If possible, the user’s most recent tweet or retweet
+  status::Dict{AbstractString, Any} #Nullable. If possible, the user’s most recent tweet or retweet
   statuses_count::Int #The number of tweets (including retweets) issued by the user
   time_zone::Nullable{ASCIIString} #Nullable. A string describing the Time Zone this user declares themselves within
   url::Nullable{AbstractString} #Nullable. A URL provided by the user in association with their profile
@@ -66,7 +58,7 @@ type TwUser
     get(d, "friends_count", 0),
     get(d, "geo_enabled", false),
     get(d, "id", 0),
-    get(d, "id_str", ""),
+    get(d, "id_str", "0"),
     get(d, "is_translator", false),
     get(d, "lang", ""),
     get(d, "listed_count", 0),
@@ -88,7 +80,7 @@ type TwUser
     get(d, "protected", false),
     get(d, "screen_name", ""),
     get(d, "show_all_inline_media", false),
-    #get(d, "status", Nullable{Tweet}()),
+    get(d,"status", Dict{AbstractString, Any}()),
     get(d, "statuses_count", 0),
     get(d, "time_zone", Nullable{ASCIIString}()),
     get(d, "url", Nullable{ASCIIString}()),
