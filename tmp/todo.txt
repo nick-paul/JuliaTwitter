@@ -1,0 +1,75 @@
+[X] GET statuses/mentions_timeline
+[X] GET statuses/user_timeline
+[X] GET statuses/home_timeline
+[X] GET statuses/retweets_of_me
+[X] GET statuses/retweets/:id
+[X] GET statuses/show/:id
+[X] GET statuses/oembed
+[X] GET statuses/retweeters/ids
+[X] GET statuses/lookup
+
+[X] GET direct_messages/sent
+[X] GET direct_messages/show
+[X] GET direct_messages
+
+[X] GET search/tweets
+
+[X] GET friendships/no_retweets/ids
+[X] GET friendships/incoming
+[X] GET friendships/outgoing
+[X] GET friendships/show
+[X] GET friendships/lookup
+
+[X] GET friends/ids
+[X] GET friends/list
+
+[X] GET followers/ids
+[X] GET followers/list
+
+[X] GET account/settings
+[X] GET account/verify_credentials
+
+[X] GET blocks/list
+[X] GET blocks/ids
+
+[X] GET users/lookup
+[X] GET users/show
+[X] GET users/search
+[X] GET users/profile_banner
+[X] GET users/suggestions/:slug
+[X] GET users/suggestions
+[X] GET users/suggestions/:slug/members
+
+[X] GET mutes/users/ids
+[X] GET mutes/users/list
+
+[X] GET favorites/list
+
+[X] GET lists/list
+[X] GET lists/statuses
+[X] GET lists/memberships
+[X] GET lists/subscribers
+[X] GET lists/subscribers/show
+[X] GET lists/members/show
+[X] GET lists/members
+[X] GET lists/show
+[X] GET lists/subscriptions
+[X] GET lists/ownerships
+
+[X] GET saved_searches/list
+[X] GET saved_searches/show/:id
+
+[X] GET geo/id/:place_id
+[X] GET geo/reverse_geocode
+[X] GET geo/search
+
+[X] GET trends/place
+[X] GET trends/available
+[X] GET trends/closest
+
+[X] GET application/rate_limit_status
+
+[X] GET help/configuration
+[X] GET help/languages
+[X] GET help/privacy
+[X] GET help/tos
