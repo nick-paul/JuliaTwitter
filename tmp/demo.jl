@@ -35,3 +35,14 @@ end
 
 # Basic function for calculating the average of a list
 avg(x) = sum(x)/length(x)
+
+
+function follow_count(x::ASCIIString)
+  q = Dict("q" => "@$x")
+
+  user_dict = get_users_search(auth, q)
+
+  user = TwUser(user_dict[1])
+
+  println("@$x has $(user.followers_count) followers")
+end

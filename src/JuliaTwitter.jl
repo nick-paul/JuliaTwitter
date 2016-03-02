@@ -10,7 +10,7 @@ include("types/TwUser.jl")
 include("types/Tweet.jl")
 
 
-using OAuth, Requests
+using OAuth, Requests, Compat
 
 export
   TwAuth,
@@ -115,5 +115,9 @@ export
   get_users_suggestions_slug,
   get_users_suggestions_slug_members
 
+
+#include("streaming.jl")
+
+#export stream_track
 
 end
