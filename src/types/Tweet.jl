@@ -4,8 +4,8 @@
 
 type Tweet
   #annotations #unused
-  contributors::Nullable{Array{TwContributor}}
-  coordinates::Nullable{TwCoordinate}
+  #contributors::Nullable{Array{TwContributor}}
+  #coordinates::Nullable{TwCoordinate}
   created_at::AbstractString
   current_user_retweet::Dict{AbstractString, Any}
   #entities::Array{TwEntities}
@@ -40,8 +40,8 @@ type Tweet
 
   Tweet(d::Dict{AbstractString, Any}) = new(
     # annotations #unused
-    get(d,"contributors", Nullable{Array{TwContributor}}()),
-    get(d,"coordinates", Nullable{TwCoordinate}()),
+    #get(d,"contributors", Nullable{Array{TwContributor}}()),
+    #get(d,"coordinates", Nullable{TwCoordinate}()),
     get(d,"created_at", ""),
     get(d,"current_user_retweet", Dict{AbstractString, Any}()),
     # get(d,"entities", Array{TwEntities}()),

@@ -34,6 +34,7 @@ function get_oauth(auth::TwAuth, url::ASCIIString, options::Dict)
   oauth_request_resource(url, "GET", options, auth.consumer_key, auth.consumer_secret, auth.access_token, auth.access_secret)
 end
 
+#Include REST APIs
 include("rest/get_account.jl")
 include("rest/get_application.jl")
 include("rest/get_blocks.jl")
@@ -52,6 +53,7 @@ include("rest/get_statuses.jl")
 include("rest/get_trends.jl")
 include("rest/get_users.jl")
 
+#Export REST APIs
 export
   get_account_settings,
   get_account_verify_credentials,
@@ -93,6 +95,7 @@ export
   get_saved_searches,
   get_saved_searches_show_id,
   get_search,
+  get_searchq,
   get_statuses,
   get_statuses_home_timeline,
   get_statuses_lookup,
@@ -116,8 +119,21 @@ export
   get_users_suggestions_slug_members
 
 
-#include("streaming.jl")
 
-#export stream_track
+#Streaming
+include("streaming/streaming.jl")
+
+#Include all active dbhandles
+#include("../dbhandle/active.jl")
+
+#Include User Config File
+include("../user_config.jl")
+
+auth = TwAuth(USER_AUTH_DICT[:consumer_key],
+              USER_AUTH_DICT[:consumer_secret],
+              USER_AUTH_DICT[:access_token],
+              USER_AUTH_DICT[:access_secret])
+
+export TwitterDB, stream_tweets
 
 end
