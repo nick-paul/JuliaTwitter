@@ -35,11 +35,19 @@ function init_stream(auth::TwAuth, typ::ASCIIString, endpoint::AbstractString, o
      )
   )
 
-  #init stream
-  #Requests.ResponseStream{MbedTLS.SSLContext}
-  if typ == "POST"
-    return Requests.post_streaming(URI("$(endpoint)?$query_str"); headers = headers)
-  else
-    return Requests.get_streaming(URI("$(endpoint)?$query_str"); headers = headers)
+  try
+    #init stream
+    #Requests.ResponseStream{MbedTLS.SSLContext}
+    if typ == "POST"
+      return Requests.post_streaming(URI("$(endpoint)?$query_str"); headers = headers)
+    else
+      return Requests.get_streaming(URI("$(endpoint)?$query_str"); headers = headers)
+    end
+
+  catch stream_error
+    println("[ERROR] Cannot connect to Twitter")
+    println("        See message below.")
+    throw(stream_error)
   end
+
 end

@@ -1,4 +1,4 @@
-#The TwTXTFile type wites the text of a tweet as a new line in a text file
+#The TwTXTFile type writes the text of a tweet as a new line in a text file
 #This type exists more for demonstration purposes and is not intended
 #   to be used for large scale data mining
 type TwTXTFile <: TwitterDB

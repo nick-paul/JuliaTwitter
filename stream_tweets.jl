@@ -45,10 +45,8 @@ proper_argname(s::AbstractString) = VALID_ARG_NAMES[s]
 
 function parse_args(args)#::Array{AbstractString, 1})
   dict = Dict{AbstractString, Union{Int, AbstractString}}(
-    "maxtweets" => 10,
-    "query" => "trump",
+    "maxtweets" => 100000,
     "time" => 60,
-    "dbh" => "TwTXTFile(\"testfile.txt\")",
     "alertevery" => 20,
     "maxerrors" => 3
   )
@@ -60,12 +58,26 @@ function parse_args(args)#::Array{AbstractString, 1})
         dict[proper_argname(args[ix])] = args[ix+1]
       else
         print_with_color(:red, "$(args[ix]) is not a valid argument\n")
+        throw(error("Invalid argument"))
       end
     catch y
       println(y)
       print_with_color(:red, "Invalid argument near $(args[ix])\n")
+      throw(error("Invalid argument"))
     end
     ix += 2
+  end
+
+  #Check for dbh
+  if !haskey(dict, "dbh")
+    println("[ERROR] Database not provided. Use -dbh "" to provide.")
+    error("database not provided")
+  end
+
+  #Check for q
+  if !haskey(dict, "q")
+    println("[ERROR] Query not provided. Use -q "" to provide.")
+    error("query not provided")
   end
 
   #Convert numbers
@@ -109,17 +121,17 @@ function main()
     throw(y)
   end
   println("Successfully initialized database: ", dbh)
-  
+
   options = Dict("track" => args["query"])
 
-  println("Now Streaming...")
+  println("Starting stream...")
   stream_tweets(JuliaTwitter.auth, dbh, options;
         max_tweets = args["maxtweets"],
         max_time = args["time"],
         alert_every = args["alertevery"],
         max_err_attemps = args["maxerrors"])
 
-  println("Collection complete")
+  println("Complete.")
 end
 
 main()

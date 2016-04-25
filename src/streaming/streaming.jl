@@ -45,47 +45,58 @@ function streamdb(tw_stream::TwStream, db::TwitterDB;
   #Create a stream buffer
   buf = start(eachline(tw_stream.twstream))
   tweet_count = 0
-
   err_attempts = 0
 
+  #Calculate the ending time (convert  mins to secs to ms)
+  end_time = time() +  60 * max_time
+
   while tweet_count < max_tweets
+    #Exit the loop if we have passed the time limit
+    if time() > end_time
+      println("Time limit reached. Collected $tweet_count tweets")
+      break
+    end
+
+    #Capture the next line and save the buf state
     line,buf = next(eachline(tw_stream.twstream), buf)
 
     try
+      #Parse JSON
       dict = JSON.parse(line)
       add_entry(db, dict)
       tweet_count+=1
 
       #reset err_attempts counter
       err_attempts = 0
-    catch
-      #Twitter will return an emppty line if there hasn't been a tweet in awhile
+    catch stream_error
+      #Twitter will return an empty line if there hasn't been a tweet in awhile
       #     that should not count as an error
 
       #If the line is not empty, alert the user
       if length(line) > 1
         err_attempts+=1
 
-        println("Error processing entry: $line")
-        println("Continuing execution...")
+        println("[WARNING] Error processing entry: $line")
+        println("          Continuing execution...")
 
         #Check err attempts
         if err_attempts >= max_err_attemps
-          println("Maximum number of consecutive errors reached. Exiting...")
+          println("[ERROR] Maximum number of consecutive errors reached. Exiting...")
 
           #Try closing the database
           try
             close_db(db)
           catch
           end
+
           return false
         end
-        
+
       end
     end
 
     #Update user
-    if tweet_count % alert_every == 0
+    if tweet_count % alert_every == 0 && tweet_count != 0
       println(STDOUT, "Wrote tweet $tweet_count...")
     end
   end
