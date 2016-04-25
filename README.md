@@ -26,8 +26,8 @@ The following will stream 500 (`-n`) tweets into the *iphone* collecion of the *
 
 ### Options
 
-  - `-dbh` The database handler typed out as it would appear in Julia. (*required*) (see database section for more details)
-  - `-q` The query to search for using [Twitter's track parameter ](https://dev.twitter.com/streaming/overview/request-parameters#track) (*required*)
+  - `-dbh` The database handler typed out as it would appear in Julia. (**required**) (see database section for more details)
+  - `-q` The query to search for using [Twitter's track parameter ](https://dev.twitter.com/streaming/overview/request-parameters#track) (**required**)
   - `-n` The number of tweets to stream (*default = 100000*)
   - `-t` The length of time (in minutes) to stream tweets. If both `-n` and `-t` are used together, the program will stream until either condition is met. (*default = 60*)
   - `-a` Will print a message to the console every N tweets (*default = 20*)
